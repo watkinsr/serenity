@@ -1192,6 +1192,7 @@ bool Parser::match_boolean_literal()
     return text == "true" || text == "false";
 }
 
+// FIXME: here return NamedType so we can see type in suggestion
 NonnullRefPtr<Type> Parser::parse_type(ASTNode& parent)
 {
     LOG_SCOPE();
@@ -1229,6 +1230,7 @@ NonnullRefPtr<Type> Parser::parse_type(ASTNode& parent)
     named_type->set_name(parse_name(*named_type));
 
     auto original_qualifiers = named_type->qualifiers();
+
     original_qualifiers.extend(parse_type_qualifiers());
     named_type->set_qualifiers(move(original_qualifiers));
 
